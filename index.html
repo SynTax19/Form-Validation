@@ -94,6 +94,8 @@
       </form>
     </div>
 
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <script type="text/javascript">
       const form = document.getElementById("form");
       const username = document.getElementById("username");
@@ -107,7 +109,50 @@
         validate();
       });
 
+      const sendData = (usernameVal, present, count) => {
+        if (present === count) {
+          alert(`Registration Successful`);
+          swal(
+            " Welcome! " + usernameVal,
+            " Registration Completed ",
+            "success"
+          );
+        }
+      };
+      const successMessage = (usernameVal) => {
+        let formCtrl = document.getElementsByClassName("form-control");
+        // var temp = formCtrl.length();
+        var count = formCtrl.length - 1;
+
+        for (var i = 0; i < formCtrl.length; i++) {
+          if (formCtrl[i].className === "form-control success") {
+            var present = 0 + i;
+            console.log(present);
+            sendData(usernameVal, present, count);
+          } else {
+            return false;
+          }
+        }
+      };
+
+      // if (successMessage === true) {
+      //   alert(`Registration Successful`);
+      //   swal(`Welcome ! ${usernameVal}, Registration Completed , success);
+      // }
+
       // validate function -->  removing spaces from both ends...
+
+      function setError(input, errormessage) {
+        const formControl = input.parentElement;
+        const small = formControl.querySelector("small");
+        formControl.className = "form-control error";
+        small.innerText = errormessage;
+      }
+
+      function setSuccess(input) {
+        const formControl = input.parentElement;
+        formControl.className = "form-control success";
+      }
 
       const validate = () => {
         const usernameVal = username.value.trim();
@@ -115,7 +160,7 @@
         const phoneVal = phone.value.trim();
         const passwordVal = password.value.trim();
         const cpasswordVal = cpassword.value.trim();
-        console.log(usernameVal);
+
         const isEmail = (emailVal) => {
           var atSym = emailVal.indexOf("@");
           if (atSym < 1) return false;
@@ -170,17 +215,7 @@
           setSuccess(cpassword);
         }
 
-        function setError(input, errormessage) {
-          const formControl = input.parentElement;
-          const small = formControl.querySelector("small");
-          formControl.className = "form-control error";
-          small.innerText = errormessage;
-        }
-
-        function setSuccess(input) {
-          const formControl = input.parentElement;
-          formControl.className = "form-control success";
-        }
+        successMessage(usernameVal);
       };
     </script>
   </body>
