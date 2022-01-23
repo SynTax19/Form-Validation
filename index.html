@@ -107,7 +107,7 @@
         validate();
       });
 
-      // validate function --> removing spaces from both ends...
+      // validate function -->  removing spaces from both ends...
 
       const validate = () => {
         const usernameVal = username.value.trim();
@@ -161,7 +161,7 @@
           setSuccess(password);
         }
 
-        // validate username
+        // validate confirm password
         if (cpasswordVal === "") {
           setError(cpassword, "Confirm Password cannot be Blank ");
         } else if (cpasswordVal != passwordVal) {
